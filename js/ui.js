@@ -39,10 +39,15 @@ export function log(m) {
 
 const opt = (v, t) => { const o = document.createElement('option'); o.value = v; o.textContent = t; return o; };
 
+const renumber = (rowsBox) => [...rowsBox.children].forEach((r, i) => { r.firstChild.textContent = i + 1; });
+
 export function addRow({ kodeOptions, maxDate, minDate }) {
   const rowsBox = $('#sbe-rows');
   const row = document.createElement('div');
   row.className = 'sbe-row';
+
+  const num = document.createElement('span');
+  num.className = 'sbe-num';
 
   const kode = document.createElement('select');
   kode.appendChild(opt('', '-- Kode --'));
@@ -70,7 +75,7 @@ export function addRow({ kodeOptions, maxDate, minDate }) {
   const del = document.createElement('button');
   del.textContent = '×';
   del.className = 'sbe-del';
-  del.onclick = () => { if (rowsBox.children.length > 1) row.remove(); };
+  del.onclick = () => { if (rowsBox.children.length > 1) { row.remove(); renumber(rowsBox); } };
 
   kode.onchange = async () => {
     kemasan.disabled = true;
@@ -85,7 +90,8 @@ export function addRow({ kodeOptions, maxDate, minDate }) {
     kemasan.disabled = false;
   };
 
-  row.append(kode, kemasan, tanggal, jumlah, status, del);
+  row.append(num, kode, kemasan, tanggal, jumlah, status, del);
   row._fields = { kode, kemasan, tanggal, jumlah, status };
   rowsBox.appendChild(row);
+  renumber(rowsBox);
 }
