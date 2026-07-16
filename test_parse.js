@@ -1,5 +1,5 @@
-const assert = require('assert');
-const { normJumlah } = require('./parse');
+import assert from 'assert';
+import { normJumlah } from './js/utils.js';
 
 assert.equal(normJumlah('0,5'), '0.5');
 assert.equal(normJumlah('2.0525'), '2.0525');
