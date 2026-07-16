@@ -1,0 +1,12 @@
+{
+  "manifest_version": 3,
+  "name": "Bulk Entry LB3",
+  "version": "1.0",
+  "description": "Bulk entry Limbah B3 Dihasilkan. Buat yang males - males aja",
+  "content_scripts": [
+    {
+      "matches": ["https://plb3.kemenlh.go.id/siraja-2024/lb3/dihasilkan/*"],
+      "js": ["parse.js", "content.js"]
+    }
+  ]
+}
