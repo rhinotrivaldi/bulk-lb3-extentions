@@ -32,14 +32,34 @@ lewat sesi login dan endpoint yang sama persis dengan pemakaian manual.
 
 ## Instalasi
 
-1. Buka `chrome://extensions`.
-2. Aktifkan **Developer mode** (pojok kanan atas).
-3. Klik **Load unpacked** → pilih folder `siraja-bulk-extension` ini.
-4. Buka halaman **LB3 → Dihasilkan**
-   (`.../siraja-2024/lb3/dihasilkan/index/data`). Panel muncul di kanan bawah.
+### 1. Ambil filenya dari GitHub
 
-Setelah mengubah kode, klik **Reload** (↻) pada ekstensi lalu refresh
-halaman.
+**Cara mudah (tanpa aplikasi tambahan):**
+
+1. Buka halaman repo:
+   <https://github.com/rhinotrivaldi/bulk-lb3-extentions>
+2. Klik tombol hijau **`< > Code`** → **Download ZIP**.
+3. **Ekstrak** file ZIP yang terunduh. Kamu akan dapat folder
+   (mis. `bulk-lb3-extentions-main`) yang di dalamnya ada `manifest.json`.
+
+**Atau lewat git** (kalau sudah terpasang):
+
+```bash
+git clone https://github.com/rhinotrivaldi/bulk-lb3-extentions.git
+```
+
+### 2. Pasang di Chrome
+
+1. Buka `chrome://extensions`.
+2. Aktifkan **Developer mode** (toggle di pojok kanan atas).
+3. Klik **Load unpacked** → pilih **folder hasil ekstrak/clone** tadi
+   (folder yang berisi `manifest.json`).
+4. Ekstensi muncul di daftar. Buka halaman **LB3 → Dihasilkan**
+   (`.../siraja-2024/lb3/dihasilkan/index/data`) — panel tampil di kanan bawah.
+
+> **Update ke versi baru:** unduh ulang ZIP terbaru (timpa folder lama), lalu
+> klik **Reload** (↻) pada kartu ekstensi di `chrome://extensions` dan refresh
+> halaman SPEED.
 
 ## Cara pakai
 
