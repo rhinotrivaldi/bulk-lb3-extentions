@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Bulk Entry LB3",
-  "version": "1.0",
+  "version": "1.0.1",
   "description": "Bulk entry Limbah B3 Dihasilkan. Buat yang males - males aja",
   "content_scripts": [
     {

@@ -27,30 +27,199 @@
     return list;
   }
 
-  const style = document.createElement('style');
+const style = document.createElement('style');
   style.textContent = `
-#sbe-panel{position:fixed;bottom:12px;right:12px;z-index:99999;background:#fff;border:1px solid #bbb;border-radius:8px;padding:12px;width:680px;box-shadow:0 4px 16px rgba(0,0,0,.25);font:12px/1.4 Consolas,monospace;color:#222}
-#sbe-panel *{box-sizing:border-box}
-#sbe-panel select,#sbe-panel input,#sbe-panel button{all:revert;font:12px/1.4 Consolas,monospace}
-#sbe-panel .sbe-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px}
-#sbe-panel .sbe-x{border:none;background:none;cursor:pointer}
-#sbe-panel .sbe-row{display:grid;grid-template-columns:1fr 1fr 132px 72px 116px 22px;gap:4px;margin-bottom:4px;align-items:center}
-#sbe-panel .sbe-row select,#sbe-panel .sbe-row input{width:100%;min-width:0}
-#sbe-panel .sbe-del{border:none;background:none;cursor:pointer;font-size:16px;padding:0}
-#sbe-panel .sbe-btn{padding:3px 12px;cursor:pointer;margin-right:6px}
-#sbe-panel #sbe-log{max-height:180px;overflow:auto;background:#f4f4f4;padding:8px;margin:8px 0 0;white-space:pre-wrap}`;
+    :root {
+      --sbe-blue: #1a73e8;
+      --sbe-blue-hover: #174ea6;
+      --sbe-border: #dadce0;
+      --sbe-text: #202124;
+      --sbe-text-muted: #5f6368;
+      --sbe-bg: #ffffff;
+      --sbe-bg-hover: #f1f3f4;
+      --sbe-danger: #ea4335;
+    }
+    
+    #sbe-panel {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 99999;
+      background: var(--sbe-bg);
+      border: 1px solid var(--sbe-border);
+      border-radius: 8px;
+      width: 720px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1), 0 1px 3px rgba(0,0,0,0.08);
+      font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      color: var(--sbe-text);
+      display: flex;
+      flex-direction: column;
+    }
+    
+    #sbe-panel * {
+      box-sizing: border-box;
+    }
+
+    #sbe-panel .sbe-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 16px;
+      background: #f8f9fa;
+      border-bottom: 1px solid var(--sbe-border);
+      border-radius: 8px 8px 0 0;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    #sbe-panel .sbe-x {
+      border: none;
+      background: none;
+      cursor: pointer;
+      color: var(--sbe-text-muted);
+      font-size: 14px;
+      padding: 4px;
+      border-radius: 4px;
+      transition: background 0.2s;
+    }
+    
+    #sbe-panel .sbe-x:hover {
+      background: var(--sbe-bg-hover);
+      color: var(--sbe-text);
+    }
+
+    #sbe-body {
+      padding: 16px;
+    }
+
+    #sbe-rows {
+      max-height: 300px;
+      overflow-y: auto;
+      margin-bottom: 16px;
+      padding-right: 4px;
+    }
+
+    #sbe-panel .sbe-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 130px 80px 120px 32px;
+      gap: 8px;
+      margin-bottom: 8px;
+      align-items: center;
+    }
+
+    #sbe-panel select, #sbe-panel input {
+      width: 100%;
+      height: 32px;
+      padding: 4px 8px;
+      border: 1px solid var(--sbe-border);
+      border-radius: 4px;
+      font-size: 13px;
+      color: var(--sbe-text);
+      background: var(--sbe-bg);
+      transition: border-color 0.2s;
+    }
+
+    #sbe-panel select:focus, #sbe-panel input:focus {
+      outline: none;
+      border-color: var(--sbe-blue);
+      box-shadow: 0 0 0 1px var(--sbe-blue);
+    }
+
+    #sbe-panel select:disabled {
+      background: #f1f3f4;
+      color: var(--sbe-text-muted);
+      cursor: not-allowed;
+    }
+
+    #sbe-panel .sbe-del {
+      height: 32px;
+      border: none;
+      background: none;
+      cursor: pointer;
+      color: var(--sbe-text-muted);
+      font-size: 18px;
+      border-radius: 4px;
+      transition: all 0.2s;
+    }
+
+    #sbe-panel .sbe-del:hover {
+      background: #fce8e6;
+      color: var(--sbe-danger);
+    }
+
+    #sbe-panel .sbe-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 8px;
+    }
+
+    #sbe-panel .sbe-btn {
+      height: 32px;
+      padding: 0 16px;
+      font-size: 13px;
+      font-weight: 500;
+      border-radius: 4px;
+      cursor: pointer;
+      border: 1px solid var(--sbe-border);
+      background: var(--sbe-bg);
+      color: var(--sbe-blue);
+      transition: background 0.2s;
+    }
+
+    #sbe-panel .sbe-btn:hover {
+      background: #f4f8fe;
+    }
+
+    #sbe-panel .sbe-btn-primary {
+      background: var(--sbe-blue);
+      color: white;
+      border: none;
+    }
+
+    #sbe-panel .sbe-btn-primary:hover {
+      background: var(--sbe-blue-hover);
+    }
+    
+    #sbe-panel .sbe-btn:disabled {
+      background: var(--sbe-border);
+      color: var(--sbe-text-muted);
+      cursor: not-allowed;
+      border: none;
+    }
+
+    #sbe-log {
+      max-height: 120px;
+      overflow-y: auto;
+      background: #202124;
+      color: #8ab4f8;
+      padding: 12px;
+      margin-top: 16px;
+      border-radius: 4px;
+      font-family: 'Consolas', 'Courier New', monospace;
+      font-size: 12px;
+      white-space: pre-wrap;
+      line-height: 1.5;
+    }
+  `;
   document.head.appendChild(style);
 
   const panel = document.createElement('div');
   panel.id = 'sbe-panel';
-  panel.innerHTML =
-    '<div class="sbe-head"><b>Bulk Entry LB3</b><button id="sbe-toggle" class="sbe-x">&#9660;</button></div>' +
-    '<div id="sbe-body">' +
-    '<div id="sbe-rows"></div>' +
-    '<button id="sbe-add" class="sbe-btn">+ tambah baris</button>' +
-    '<button id="sbe-run" class="sbe-btn">Kirim semua</button>' +
-    '<pre id="sbe-log"></pre>' +
-    '</div>';
+  panel.innerHTML = `
+    <div class="sbe-head">
+      <span>Bulk Entry LB3</span>
+      <button id="sbe-toggle" class="sbe-x" title="Minimize/Maximize">&#9660;</button>
+    </div>
+    <div id="sbe-body">
+      <div id="sbe-rows"></div>
+      <div class="sbe-footer">
+        <button id="sbe-add" class="sbe-btn">+ Tambah Baris</button>
+        <button id="sbe-run" class="sbe-btn sbe-btn-primary">Kirim Semua</button>
+      </div>
+      <pre id="sbe-log" style="display:none;"></pre>
+    </div>
+  `;
   document.body.appendChild(panel);
 
   const $ = (id) => panel.querySelector(id);
@@ -63,6 +232,7 @@
 
   const log = (m) => {
     const el = $('#sbe-log');
+    el.style.display = '';
     el.textContent += m + '\n';
     el.scrollTop = el.scrollHeight;
   };
